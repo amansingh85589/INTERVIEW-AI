@@ -61,13 +61,15 @@ async function registerUserController(req, res) {
 
 }
 
-console.log("Setting cookie with production options");
+
 /**
  * @name loginUserController
  * @description login a user, expects email and password in the request body
  * @access Public
  */
 async function loginUserController(req, res) {
+    console.log("Setting cookie with production options");
+
 
     const { email, password } = req.body
 
