@@ -3,7 +3,7 @@ const { z } = require("zod")
 const { zodToJsonSchema } = require("zod-to-json-schema")
 const isLocal = process.env.NODE_ENV !== "production"
 const puppeteer = isLocal ? require("puppeteer") : require("puppeteer-core")
-const chromium = isLocal ? null : require("@sparticuz/chromium")
+const chromium = isLocal ? null : (require("@sparticuz/chromium").default || require("@sparticuz/chromium"))
 
 const ai = new GoogleGenAI({
     apiKey: process.env.GOOGLE_GENAI_API_KEY
