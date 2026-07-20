@@ -40,8 +40,7 @@ const Home = () => {
     }
 
     const handleGenerateReport = async () => {
-        const resumeFileToSend = resumeInputRef.current.files[ 0 ]
-        const data = await generateReport({ jobDescription, selfDescription, resumeFile: resumeFileToSend })
+        const data = await generateReport({ jobDescription, selfDescription, resumeFile })
         navigate(`/interview/${data._id}`)
     }
 
@@ -114,6 +113,16 @@ const Home = () => {
                                 <span className='badge badge--best'>Best Results</span>
                             </label>
 
+                           <input
+                                ref={resumeInputRef}
+                                hidden
+                                type='file'
+                                id='resume'
+                                name='resume'
+                                accept='.pdf,.docx'
+                                onChange={handleFileChange}
+                            />
+
                             {!resumeFile ? (
                                 <label className='dropzone' htmlFor='resume'>
                                     <span className='dropzone__icon'>
@@ -121,15 +130,6 @@ const Home = () => {
                                     </span>
                                     <p className='dropzone__title'>Click to upload or drag &amp; drop</p>
                                     <p className='dropzone__subtitle'>PDF or DOCX (Max 5MB)</p>
-                                    <input
-                                        ref={resumeInputRef}
-                                        hidden
-                                        type='file'
-                                        id='resume'
-                                        name='resume'
-                                        accept='.pdf,.docx'
-                                        onChange={handleFileChange}
-                                    />
                                 </label>
                             ) : (
                                 <div className='dropzone dropzone--filled'>
