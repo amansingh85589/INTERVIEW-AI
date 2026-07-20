@@ -19,10 +19,18 @@ const Home = () => {
         setJobDescription(e.target.value)
     }
 
-    const handleFileChange = (e) => {
-        const file = e.target.files[ 0 ]
-        setResumeFile(file || null)
+  const handleFileChange = (e) => {
+    const file = e.target.files[ 0 ]
+    if (file && file.type !== "application/pdf") {
+        alert("Only PDF files are supported right now. Please upload a .pdf resume.")
+        e.target.value = ""
+        setResumeFile(null)
+        return
     }
+    setResumeFile(file || null)
+}
+
+    
 
     const handleRemoveFile = (e) => {
         e.preventDefault()
@@ -39,14 +47,15 @@ const Home = () => {
         return `${(bytes / (1024 * 1024)).toFixed(2)} MB`
     }
 
-  const handleGenerateReport = async () => {
-        try {
-            const data = await generateReport({ jobDescription, selfDescription, resumeFile })
-            navigate(`/interview/${data._id}`)
-        } catch (err) {
-            alert("Something went wrong generating your report. Please check your resume file and try again.", err)
-        }
+ const handleGenerateReport = async () => {
+    try {
+        const data = await generateReport({ jobDescription, selfDescription, resumeFile })
+        navigate(`/interview/${data._id}`)
+    } catch (err) {
+        const message = err?.response?.data?.message || "Something went wrong generating your report. Please try again."
+        alert(message)
     }
+}
 
    if (loading) {
         return (
@@ -62,6 +71,8 @@ const Home = () => {
                 </div>
             </main>
         )
+
+        
     }
 
     return (
@@ -133,7 +144,7 @@ const Home = () => {
                                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 16 12 12 8 16" /><line x1="12" y1="12" x2="12" y2="21" /><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3" /></svg>
                                     </span>
                                     <p className='dropzone__title'>Click to upload or drag &amp; drop</p>
-                                    <p className='dropzone__subtitle'>PDF or DOCX (Max 5MB)</p>
+                                    <p className='dropzone__subtitle'>PDF only (Max 5MB)</p>
                                 </label>
                             ) : (
                                 <div className='dropzone dropzone--filled'>

@@ -37,6 +37,11 @@ interviewRouter.get("/", authMiddleware.authUser, interviewController.getAllInte
  */
 interviewRouter.post("/resume/pdf/:interviewReportId", authMiddleware.authUser, interviewController.generateResumePdfController)
 
-
+interviewRouter.use((err, req, res, next) => {
+    if (err) {
+        return res.status(400).json({ message: err.message || "File upload failed." })
+    }
+    next()
+})
 
 module.exports = interviewRouter
