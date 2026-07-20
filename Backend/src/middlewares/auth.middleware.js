@@ -11,7 +11,7 @@ async function authUser(req, res, next) {
     console.log("Cookies:", req.cookies);
     console.log("Headers:", req.headers.cookie);
 
-    const token = req.cookies.token;
+    
 
     if (!token) {
         console.log("❌ No token found");
