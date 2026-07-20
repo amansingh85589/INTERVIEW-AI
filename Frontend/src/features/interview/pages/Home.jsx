@@ -39,9 +39,13 @@ const Home = () => {
         return `${(bytes / (1024 * 1024)).toFixed(2)} MB`
     }
 
-    const handleGenerateReport = async () => {
-        const data = await generateReport({ jobDescription, selfDescription, resumeFile })
-        navigate(`/interview/${data._id}`)
+  const handleGenerateReport = async () => {
+        try {
+            const data = await generateReport({ jobDescription, selfDescription, resumeFile })
+            navigate(`/interview/${data._id}`)
+        } catch (err) {
+            alert("Something went wrong generating your report. Please check your resume file and try again.", err)
+        }
     }
 
    if (loading) {
