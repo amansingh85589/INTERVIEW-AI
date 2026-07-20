@@ -371,3 +371,194 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
         }
     }
 }
+
+// ── Char Counter States ────────────────────────────────────────────────────
+.char-counter {
+    transition: color 0.2s;
+
+    &--limit {
+        color: $accent;
+        font-weight: 600;
+    }
+}
+
+// ── Dropzone — Filled State ──────────────────────────────────────────────────
+.dropzone {
+    &--filled {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0.75rem;
+        padding: 0.9rem 1rem;
+        border: 1px solid rgba(#3fb950, 0.3);
+        background-color: rgba(#3fb950, 0.06);
+        cursor: default;
+
+        &:hover {
+            border-color: rgba(#3fb950, 0.3);
+            background-color: rgba(#3fb950, 0.06);
+        }
+    }
+
+    &__check {
+        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: rgba(#3fb950, 0.15);
+        color: #3fb950;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__file-info {
+        flex: 1;
+        min-width: 0;
+        text-align: left;
+    }
+
+    &__file-name {
+        margin: 0;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: $text-primary;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__file-meta {
+        margin: 0.15rem 0 0;
+        font-size: 0.75rem;
+        color: #3fb950;
+    }
+
+    &__remove {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 0.4rem;
+        background: none;
+        border: 1px solid $border-color;
+        color: $text-muted;
+        cursor: pointer;
+        transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+
+        &:hover {
+            background-color: rgba($accent, 0.1);
+            color: $accent;
+            border-color: rgba($accent, 0.3);
+        }
+    }
+}
+
+// ── Responsive: Tablet & Mobile ───────────────────────────────────────────────
+@media (max-width: 900px) {
+    .home-page {
+        padding: 2rem 1rem;
+        gap: 1.5rem;
+    }
+
+    .page-header {
+        h1 {
+            font-size: 1.6rem;
+        }
+
+        p {
+            font-size: 0.875rem;
+            max-width: 100%;
+        }
+    }
+
+    .interview-card {
+        border-radius: 0.75rem;
+
+        &__body {
+            flex-direction: column;
+            min-height: unset;
+        }
+
+        &__footer {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.75rem;
+            padding: 1rem;
+
+            .footer-info {
+                text-align: center;
+            }
+        }
+    }
+
+    // Vertical divider becomes a horizontal rule between stacked panels
+    .panel-divider {
+        width: 100%;
+        height: 1px;
+    }
+
+    .panel {
+        padding: 1.25rem;
+
+        &__textarea {
+            min-height: 140px;
+
+            &--short {
+                height: 100px;
+            }
+        }
+
+        &--left {
+            .char-counter {
+                position: static;
+                text-align: right;
+                margin-top: 0.4rem;
+            }
+        }
+    }
+
+    .generate-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 0.85rem 1.5rem;
+    }
+
+    .recent-reports {
+        .reports-list {
+            flex-direction: column;
+
+            .report-item {
+                flex: unset;
+                width: 100%;
+            }
+        }
+    }
+
+    .page-footer {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header h1 {
+        font-size: 1.35rem;
+    }
+
+    .panel__header h2 {
+        font-size: 0.9rem;
+    }
+
+    .dropzone {
+        padding: 1.25rem 0.75rem;
+
+        &__title {
+            font-size: 0.8rem;
+        }
+    }
+}
