@@ -7,11 +7,20 @@ async function authUser(req, res, next) {
 
     const token = req.cookies.token
 
+   console.log("===== AUTH MIDDLEWARE =====");
+    console.log("Cookies:", req.cookies);
+    console.log("Headers:", req.headers.cookie);
+
+    const token = req.cookies.token;
+
     if (!token) {
+        console.log("❌ No token found");
         return res.status(401).json({
             message: "Token not provided."
-        })
+        });
     }
+
+    console.log("✅ Token received");
 
     const isTokenBlacklisted = await tokenBlacklistModel.findOne({
         token
