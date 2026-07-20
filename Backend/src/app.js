@@ -7,7 +7,7 @@ const app = express()
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin:  "https://interview-ai-mu-olive.vercel.app/login", "http://localhost:5173",
+    origin:  "https://interview-ai-mu-olive.vercel.app", "http://localhost:5173",
     credentials: true
 }))
 
