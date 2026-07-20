@@ -45,10 +45,18 @@ const Home = () => {
         navigate(`/interview/${data._id}`)
     }
 
-    if (loading) {
+   if (loading) {
         return (
             <main className='loading-screen'>
-                <h1>Loading your interview plan...</h1>
+                <div className='loading-screen__content'>
+                    <div className='loading-spinner'>
+                        <div className='loading-spinner__ring'></div>
+                        <div className='loading-spinner__ring'></div>
+                        <div className='loading-spinner__core'></div>
+                    </div>
+                    <h1>Crafting your interview plan</h1>
+                    <p>Analyzing your resume and the job description — this usually takes about 30 seconds.</p>
+                </div>
             </main>
         )
     }
